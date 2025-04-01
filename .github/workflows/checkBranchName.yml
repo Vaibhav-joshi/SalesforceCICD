@@ -31,3 +31,5 @@ jobs:
         run: |
           echo "GitHub Username: ${{ github.actor }}"
           echo "Branch Name: ${{ github.ref_name }}"
+          echo "Pull Request Name: ${{ github.event.pull_request.title }}"
+          echo "Branch Name: ${{ github.event.pull_request.head.ref }}"
