@@ -28,4 +28,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Your Task
-        run: echo "test echo"
+        run: |
+          echo "GitHub Username: ${{ github.actor }}"
+          echo "Branch Name: ${{ github.ref_name }}"
