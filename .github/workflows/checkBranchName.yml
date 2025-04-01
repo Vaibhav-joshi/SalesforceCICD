@@ -21,7 +21,7 @@ on:
       - reopened
 
 jobs:
-  my-job:
+  Validate-branch-name:
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Code
