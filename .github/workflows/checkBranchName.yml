@@ -1,0 +1,33 @@
+name: Check Branch Name
+
+on:
+  # Trigger when a branch is created
+  create:
+    branches:
+      - "**"
+    branch-ignore:
+      - "main"
+
+  # Trigger on push events to any branch
+  push:
+    branches:
+      - "**"
+    branch-ignore:
+      - "main"
+
+  # Trigger when a pull request is created or updated
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v3
+
+      - name: Run Your Task
+        run: echo "test echo"
