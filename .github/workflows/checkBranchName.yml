@@ -1,19 +1,17 @@
 name: Check Branch Name
 
 on:
-  # Trigger when a branch is created
+  # Trigger when a branch is created (excluding main)
   create:
     branches:
-      - "**"
-    branches-ignore:
-      - main
+      - "*"
+      - "!main"
 
-  # Trigger on push events to any branch
+  # Trigger on push events to any branch (excluding main)
   push:
     branches:
-      - "**"
-    branches-ignore:
-      - main
+      - "*"
+      - "!main"
 
   # Trigger when a pull request is created or updated
   pull_request:
