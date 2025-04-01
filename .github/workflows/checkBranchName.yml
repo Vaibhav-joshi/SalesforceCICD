@@ -24,12 +24,13 @@ jobs:
   Validate-branch-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Out Code
-        uses: actions/checkout@v3
-
-      - name: Run Your Task
+      - name: Branch Name validation
         run: |
           echo "GitHub Username: ${{ github.actor }}"
-          echo "Branch Name: ${{ github.ref_name }}"
+          echo "Pull Request Name: ${{ github.event.pull_request.title }}"
+          echo "Branch Name: ${{ github.event.pull_request.head.ref }}"
+      - name: PR Name validation
+        run: |
+          echo "GitHub Username: ${{ github.actor }}"
           echo "Pull Request Name: ${{ github.event.pull_request.title }}"
           echo "Branch Name: ${{ github.event.pull_request.head.ref }}"
