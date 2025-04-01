@@ -29,6 +29,7 @@ jobs:
           echo "GitHub Username: ${{ github.actor }}"
           echo "Pull Request Name: ${{ github.event.pull_request.title }}"
           echo "Branch Name: ${{ github.event.pull_request.head.ref }}"
+          exit
       - name: PR Name validation
         run: |
           echo "GitHub Username: ${{ github.actor }}"
