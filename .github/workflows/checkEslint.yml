@@ -38,4 +38,4 @@ jobs:
 
       # Step 4: Run ESLint on Changed Files
       - name: Run ESLint test
-        run: node ../.github/workflows/pipelines/runEslint.js
+        run: node ./.github/workflows/pipelines/runEslint.js
