@@ -23,7 +23,7 @@ jobs:
         run: pwd
 
       - name: Debug SFProject Directory
-        run: ls ../SFProject
+        run: ls -R /home/runner/work/SalesforceCICD/SalesforceCICD/
 
       # Step 2: Set Up Node.js Environment
       - name: Set Up Node.js
