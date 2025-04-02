@@ -39,4 +39,4 @@ jobs:
       # Step 4: Run ESLint on Changed Files
       - name: Run ESLint test
         working-directory: ./SFProject
-        run: npm run lint
+        run: node ./.github/workflows/pipelines/runEslint.js

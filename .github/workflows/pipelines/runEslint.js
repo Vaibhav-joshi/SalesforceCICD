@@ -2,25 +2,34 @@ const { execSync } = require("child_process");
 
 (async () => {
   try {
-    // Fetch changed files
-    console.log("Fetching changed files...");
-    const diffCommand = "git diff --name-only origin/main...HEAD";
-    const changedFiles = execSync(diffCommand).toString().trim().split("\n");
+    // Define the directories to search
+    const directories = [
+      "force-app/main/default/aura",
+      "force-app/main/default/lwc"
+    ];
 
-    // Filter JavaScript files
-    const jsFiles = changedFiles.filter((file) => file.endsWith(".js"));
+    // Build the find command
+    const findCommand = `find ${directories.join(" ")} -name "*.js"`;
+    console.log(`Looking for JavaScript files in: ${directories.join(", ")}`);
 
-    if (jsFiles.length === 0) {
-      console.log("No JavaScript files changed, skipping ESLint.");
-      process.exit(0); // Exit with success
+    // Execute the find command
+    const files = execSync(findCommand).toString().trim().split("\n");
+
+    // Check if any files were found
+    if (files.length === 0 || files[0] === "") {
+      console.log("No JavaScript files found in aura and lwc folders. Skipping ESLint.");
+      process.exit(0); // Exit gracefully
     }
 
-    console.log("Running ESLint on the following files:");
-    console.log(jsFiles.join("\n"));
+    // Log the found files
+    console.log("Found the following JavaScript files:");
+    files.forEach(file => console.log(file));
 
-    // Run ESLint
-    const eslintCommand = `npx eslint ${jsFiles.join(" ")}`;
-    execSync(eslintCommand, { stdio: "inherit" }); // Show ESLint output
+    // Run ESLint on the found files
+    const eslintCommand = `npx eslint ${files.join(" ")}`;
+    console.log("Running ESLint...");
+    execSync(eslintCommand, { stdio: "inherit" }); // Inherit stdio to display ESLint output
+    console.log("ESLint completed successfully!");
   } catch (error) {
     console.error("Error during ESLint execution:", error.message);
     process.exit(1); // Exit with failure
