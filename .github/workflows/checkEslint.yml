@@ -19,6 +19,12 @@ jobs:
           fetch-depth: 0 # Fetch entire history
           ref: main # Ensure the main branch is fetched
 
+      - name: Print Working Directory
+        run: pwd
+
+      - name: Debug SFProject Directory
+        run: ls ./SFProject
+
       # Step 2: Set Up Node.js Environment
       - name: Set Up Node.js
         uses: actions/setup-node@v3
