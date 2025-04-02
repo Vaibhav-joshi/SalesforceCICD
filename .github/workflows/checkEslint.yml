@@ -27,5 +27,5 @@ jobs:
         run: npm install
 
       # Step 4: Run ESLint on Changed Files
-      - name: Run ESLint
+      - name: Run ESLint test
         run: node ./.github/workflows/pipelines/runEslint.js
