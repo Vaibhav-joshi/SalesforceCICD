@@ -23,7 +23,7 @@ jobs:
         run: pwd
 
       - name: Debug SFProject Directory
-        run: ls ./SFPROJECT
+        run: ls ./SFProject
 
       # Step 2: Set Up Node.js Environment
       - name: Set Up Node.js
