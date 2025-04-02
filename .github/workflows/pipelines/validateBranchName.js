@@ -18,6 +18,7 @@ if (branchPattern.test(branchName)) {
 // Check for the presence of a username
 const usernamePattern = /^[a-zA-Z]+\.[a-zA-Z]+$/; // Pattern for firstname.lastname
 const username = branchName.split("/")[1]; // Extract 'firstname.lastname'
+console.log(`Username is valid: ${username}`);
 
 if (usernamePattern.test(username)) {
   console.log(`Username is valid: ${username}`);
