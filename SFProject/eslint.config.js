@@ -1,4 +1,4 @@
-import { Linter } from '@eslint/eslintrc';
+//import { Linter } from '@eslint/eslintrc';
 
 export default [
   {
