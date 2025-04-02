@@ -4,8 +4,8 @@ const { execSync } = require("child_process");
   try {
     // Define the directories to search
     const directories = [
-      "force-app/main/default/aura",
-      "force-app/main/default/lwc"
+      "SFProject/force-app/main/default/aura",
+      "SFProject/force-app/main/default/lwc"
     ];
 
     // Build the find command
