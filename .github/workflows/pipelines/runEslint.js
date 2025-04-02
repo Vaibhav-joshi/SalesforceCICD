@@ -1,5 +1,4 @@
 const { execSync } = require("child_process");
-const fs = require("fs");
 
 (async () => {
   try {
@@ -21,7 +20,7 @@ const fs = require("fs");
 
     // Run ESLint
     const eslintCommand = `npx eslint ${jsFiles.join(" ")}`;
-    execSync(eslintCommand, { stdio: "inherit" }); // Inherit stdio to show output
+    execSync(eslintCommand, { stdio: "inherit" }); // Show ESLint output
   } catch (error) {
     console.error("Error during ESLint execution:", error.message);
     process.exit(1); // Exit with failure
