@@ -1,0 +1,41 @@
+name: ESLint for PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  eslint-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check Out Code
+      - name: Check Out Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch entire history
+          #ref: main # Ensure the main branch is fetched
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: Debug SFProject Directory
+        run: ls -R /home/runner/work/SalesforceCICD/SalesforceCICD/
+
+      # Step 2: Set Up Node.js Environment
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      # Step 3: Install Dependencies
+      - name: Install Dependencies
+        working-directory: ./SFProject
+        run: npm install --legacy-peer-deps
+
+      # Step 4: Run ESLint on Changed Files
+      - name: Run ESLint test
+        run: node ./.github/workflows/pipelines/runEslint.js
