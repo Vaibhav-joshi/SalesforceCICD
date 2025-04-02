@@ -1,19 +1,6 @@
 name: Check Branch Name
 
 on:
-  # Trigger when a branch is created (excluding main)
-  create:
-    branches:
-      - "*"
-      - "!main"
-
-  # Trigger on push events to any branch (excluding main)
-  push:
-    branches:
-      - "*"
-      - "!main"
-
-  # Trigger when a pull request is created or updated
   pull_request:
     types:
       - opened
@@ -24,14 +11,18 @@ jobs:
   Validate-branch-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Branch Name validation
-        run: |
-          echo "GitHub Username: ${{ github.actor }}"
-          echo "Pull Request Name: ${{ github.event.pull_request.title }}"
-          echo "Branch Name: ${{ github.event.pull_request.head.ref }}"
-          exit
-      - name: PR Name validation
-        run: |
-          echo "GitHub Username: ${{ github.actor }}"
-          echo "Pull Request Name: ${{ github.event.pull_request.title }}"
-          echo "Branch Name: ${{ github.event.pull_request.head.ref }}"
+      # Step 1: Check Out Code
+      - name: Check Out Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set Node.js Environment (Optional, if not already available)
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Run the JavaScript Validation
+      - name: Validate Branch Name
+        env:
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+        run: node ./pipelines/validateBranchName.js
