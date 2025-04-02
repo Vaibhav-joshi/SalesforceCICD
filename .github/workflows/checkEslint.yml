@@ -23,7 +23,7 @@ jobs:
         run: pwd
 
       - name: Debug SFProject Directory
-        run: ls ./SFProject
+        run: ls ../SFProject
 
       # Step 2: Set Up Node.js Environment
       - name: Set Up Node.js
@@ -38,4 +38,4 @@ jobs:
 
       # Step 4: Run ESLint on Changed Files
       - name: Run ESLint test
-        run: node ./.github/workflows/pipelines/runEslint.js
+        run: node ../.github/workflows/pipelines/runEslint.js
