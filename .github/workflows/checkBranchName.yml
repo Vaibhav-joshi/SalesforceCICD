@@ -15,19 +15,23 @@ jobs:
     needs: setup-node # CLI installation depends on Node.js setup
     uses: ./.github/workflows/setupCli.yml
 
-  validate-branch:
+  validate-delta:
     needs: setup-cli
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug Working Directory
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Ensure full repository checkout
+
+      - name: Debug Repository Structure
         run: |
           echo "Current directory: $(pwd)"
           ls -al
-
-      - name: Check SFProject Folder
-        run: |
-          ls -al ./SFProject/scripts/cicdPipelines/
+          ls -al SFProject/
+          ls -al SFProject/scripts/cicdPipelines/
 
       - name: Run validateBranchName.js
         run: node ./SFProject/scripts/cicdPipelines/validateBranchName.js
+
