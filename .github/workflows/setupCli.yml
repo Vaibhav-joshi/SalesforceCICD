@@ -1,0 +1,17 @@
+name: Setup Salesforce CLI
+
+on:
+  workflow_call:
+
+jobs:
+  setup-cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli
+
+      - name: Install sfdx-git-delta
+        run: |
+          echo Y | sfdx plugins:install sfdx-git-delta
+          sfdx plugins

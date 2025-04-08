@@ -1,28 +1,25 @@
-name: Check Branch Name
+name: Validate PR Changes in UAT
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+    branches:
+      - main
 
 jobs:
-  Validate-branch-name:
+  setup-node:
+    uses: ./.github/workflows/setupNode.yml
+    with:
+      node_version: '18' # Parameterized Node.js version
+
+  setup-cli:
+    needs: setup-node # CLI installation depends on Node.js setup
+    uses: ./.github/workflows/setupCli.yml
+
+  validate-delta:
+    needs: setup-cli # Delta validation depends on CLI installation
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Check Out Code
-      - name: Check Out Code
-        uses: actions/checkout@v3
-
-      # Step 2: Set Node.js Environment (Optional, if not already available)
-      - name: Set Up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      # Step 3: Run the JavaScript Validation
-      - name: Validate Branch Name
-        env:
-          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
-        run: node ./.github/workflows/pipelines/validateBranchName.js
+      # Step 1: Execute validateBranch.js
+      - name: Run validateBranch.js
+        run: node ./SFProject/scripts/cicdPipelines/validateBranchName.js
