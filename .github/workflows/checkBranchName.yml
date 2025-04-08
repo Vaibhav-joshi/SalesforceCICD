@@ -33,5 +33,7 @@ jobs:
           ls -al SFProject/scripts/cicdPipelines/
 
       - name: Run validateBranchName.js
+        env:
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         run: node ./SFProject/scripts/cicdPipelines/validateBranchName.js
 
