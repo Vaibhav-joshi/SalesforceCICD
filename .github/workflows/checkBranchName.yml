@@ -15,17 +15,19 @@ jobs:
     needs: setup-node # CLI installation depends on Node.js setup
     uses: ./.github/workflows/setupCli.yml
 
-  validate-delta:
+  validate-branch:
     needs: setup-cli
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug Current Directory
+      - name: Debug Working Directory
         run: |
           echo "Current directory: $(pwd)"
           ls -al
-          ls -al SFProject/scripts/cicdPipelines/
 
-      - name: Run validateBranch.js
+      - name: Check SFProject Folder
+        run: |
+          ls -al ./SFProject/scripts/cicdPipelines/
+
+      - name: Run validateBranchName.js
         run: node ./SFProject/scripts/cicdPipelines/validateBranchName.js
-
