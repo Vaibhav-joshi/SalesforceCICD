@@ -1,3 +1,5 @@
+console.log(`Current working directory: ${process.cwd()}`);
+
 const branchName = process.env.BRANCH_NAME;
 const username = branchName.split("/")[1];
 

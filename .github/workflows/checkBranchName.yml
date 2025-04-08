@@ -16,10 +16,16 @@ jobs:
     uses: ./.github/workflows/setupCli.yml
 
   validate-delta:
-    needs: setup-cli # Delta validation depends on CLI installation
+    needs: setup-cli
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Execute validateBranch.js
+      - name: Debug Current Directory
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -al
+          ls -al SFProject/scripts/cicdPipelines/
+
       - name: Run validateBranch.js
         run: node ./SFProject/scripts/cicdPipelines/validateBranchName.js
+
