@@ -25,7 +25,7 @@ jobs:
 
         -   name: App npm global binaries to PATH
             run: |
-                export PATH $(npm bin --global): $PATH
+                export PATH=$(npm bin --global):$PATH
                 echo "Now Path: $PATH"
 
         -   name: Install Salesforce CLI
