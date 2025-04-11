@@ -52,7 +52,7 @@ jobs:
                 sf org login jwt --username ${{secrets.USER_NAME}} --jwt-key-file server.key  --client-id ${{secrets.CONSUMER_KEY}}  --instance-url  ${{vars.DEV_URL}}  --set-default
                 rm -f server.key
 
-        -   name: Validate delta package
+        -   name: Validate delta sf package
             run: |
                 sf project deploy validate --source-dir changed-sources/SFProject/force-app --test-level RunLocalTests
 
