@@ -42,7 +42,7 @@ jobs:
         -   name: Generate delta package
             run: |
                 mkdir changed-sources
-                sf sgd source delta --to "HEAD" --from "HEAD-1" --output changed-sources/ --generate-delta --source force-app/
+                sf sgd source delta --to "HEAD" --from "HEAD-1" --output changed-sources/ --generate-delta --source SFProject/force-app/
                 sfdx plugins
 
         -   name: Dev login
@@ -53,6 +53,6 @@ jobs:
 
         -   name: Validate delta package
             run: |
-                sf project deploy validate --source-dir changed-sources/force-app --test-level RunLocalTests
+                sf project deploy validate --source-dir changed-sources/SFProjectforce-app --test-level RunLocalTests
 
 
