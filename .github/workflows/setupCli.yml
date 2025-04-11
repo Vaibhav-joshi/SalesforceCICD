@@ -1,0 +1,38 @@
+name: Setup Salesforce CLI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-cli:
+    runs-on: ubuntu-latest
+
+    steps:
+        -   name: Install Salesforce CLI
+            run: |
+                echo "[INFO] Installing Salesforce CLI..."
+                npm install --global @salesforce/cli
+                echo "[INFO] Salesforce CLI installed successfully."
+
+        -   name: Add npm global binaries to PATH
+            run: |
+                export PATH=$(npm bin --global):$PATH
+                echo "PATH updated: $PATH"
+
+        -   name: Verify Salesforce CLI Installation
+            run: |
+              which sf || echo "[ERROR] sf command not found"
+              sf --version || echo "[ERROR] Unable to fetch sf version"
+
+        -   name: Install sfdx-git-delta
+            run: |
+              echo Y | sfdx plugins:install sfdx-git-delta
+              sfdx plugins
+
+        -   name: Install sfdx-git-delta
+            run: |
+              echo Y | sfdx plugins:install sfdx-git-delta
+              sfdx plugins
+
+        
+
