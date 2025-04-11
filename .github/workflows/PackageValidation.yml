@@ -1,0 +1,58 @@
+name: Validate Delta package
+description: validate
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  validate-package:
+    runs-on: ubuntu-latest
+
+    steps:
+        -   name: Checkout
+            uses: actions/checkout@v3
+            with:
+                fetch-depth: 0
+
+        -   name: Install Node
+            uses: actions/setup-node@v3
+            with:
+                node-version: 18
+
+        -   name: App npm global binaries to PATH
+            run: |
+                export PATH $(npm bin --global): $PATH
+                echo "Now Path: $PATH"
+
+        -   name: Install Salesforce CLI
+            run: |
+                echo "[INFO] Installing Salesforce CLI..."
+                npm install --global @salesforce/cli
+                echo "[INFO] Salesforce CLI installed successfully."
+
+        -   name: Install sfdx-git-delta
+            run: |
+                echo Y | sfdx plugins:install sfdx-git-delta
+                sfdx plugins
+
+        -   name: Generate delta package
+            run: |
+                mkdir changed-sources
+                sf sgd source delta --to "HEAD" --from "HEAD-1" --output changed-sources/ --generate-delta --source force-app/
+                sfdx plugins
+
+        -   name: Dev login
+            run: |
+                echo "${{secrets.SERVER_KEY}}" >server.key
+                sf org login jwt --username ${{secrets.USER_NAME}} --jwt-key-file server.key  --client-id ${{secrets.CONSUMER_KEY}}  --instance-url  ${{vars.DEV_URL}}  --set-default
+                rm -f server.key
+
+        -   name: Validate delta package
+            run: |
+                sf project deploy validate --source-dir changed-sources/force-app --test-level RunLocalTests
+
+

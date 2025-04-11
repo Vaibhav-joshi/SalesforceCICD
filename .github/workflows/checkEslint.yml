@@ -1,11 +1,7 @@
 name: ESLint for PR
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+  workflow_dispatch:
 
 jobs:
   eslint-check:

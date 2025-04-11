@@ -1,11 +1,7 @@
 name: Setup Node.js
 
 on:
-  workflow_call:
-    inputs:
-      node_version:
-        required: true
-        type: string
+    workflow_dispatch:
 
 jobs:
   setup-node:
