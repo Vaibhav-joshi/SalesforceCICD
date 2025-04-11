@@ -11,6 +11,7 @@ on:
 jobs:
   validate-package:
     runs-on: ubuntu-latest
+    environment: DEV
 
     steps:
         -   name: Checkout
