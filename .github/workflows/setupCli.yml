@@ -1,7 +1,7 @@
 name: Setup Salesforce CLI
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   setup-cli:
@@ -19,20 +19,20 @@ jobs:
                 export PATH=$(npm bin --global):$PATH
                 echo "PATH updated: $PATH"
 
-      - name: Verify Salesforce CLI Installation
-        run: |
-          which sf || echo "[ERROR] sf command not found"
-          sf --version || echo "[ERROR] Unable to fetch sf version"
+        -   name: Verify Salesforce CLI Installation
+            run: |
+              which sf || echo "[ERROR] sf command not found"
+              sf --version || echo "[ERROR] Unable to fetch sf version"
 
-      - name: Install sfdx-git-delta
-        run: |
-          echo Y | sfdx plugins:install sfdx-git-delta
-          sfdx plugins
+        -   name: Install sfdx-git-delta
+            run: |
+              echo Y | sfdx plugins:install sfdx-git-delta
+              sfdx plugins
 
-      - name: Install sfdx-git-delta
-        run: |
-        echo Y | sfdx plugins:install sfdx-git-delta
-        sfdx plugins
+        -   name: Install sfdx-git-delta
+            run: |
+              echo Y | sfdx plugins:install sfdx-git-delta
+              sfdx plugins
 
         
 
