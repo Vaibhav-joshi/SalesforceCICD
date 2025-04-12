@@ -42,8 +42,9 @@ jobs:
 
         -   name: Generate delta package
             run: |
-                BASE_SHA=$(git rev-parse "$GITHUB_BASE_REF")
-                HEAD_SHA=$(git rev-parse "$GITHUB_HEAD_REF")
+                git fetch -all
+                BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
+                HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
                 echo "  "
                 echo "====="
                 echo "=======================Contant of Base start==="
