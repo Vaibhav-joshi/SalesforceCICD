@@ -12,7 +12,7 @@ if (branchPattern.test(branchName) && usernamePattern.test(username)) {
 } else {
   console.error(
     `Invalid branch name: ${branchName}\n` +
-      `Expected format: feature/firstname.lastname/US{number}`
+      `Expected new format: feature/firstname.lastname/US{number}`
   );
   process.exit(1); // Exit with failure  
 }
