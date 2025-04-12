@@ -43,8 +43,14 @@ jobs:
         -   name: Generate delta package
             run: |
                 mkdir changed-sources
-                sfdx sgd source delta --to "remotes/origin/HEAD" --from "remotes/origin/feature/vaibhav.joshi/US1234" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject/force-app/
-                sfdx plugins
+                git fetch --all
+                BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
+                HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
+                echo "BASE ref SHA : $BASE_SHA"
+                echo "HEAD ref SHA : $HEAD_SHA"
+                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject/force-app/
+                echo "Contents of changed-sources:"
+                ls -R changed-sources
 
         -   name: Dev login
             run: |
