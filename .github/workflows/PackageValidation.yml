@@ -18,6 +18,7 @@ jobs:
             uses: actions/checkout@v3
             with:
                 fetch-depth: 0
+                ref: ${{ github.event.pull_request.head.ref }} # Checkout the PR branch explicitly
 
         -   name: Install Node
             uses: actions/setup-node@v3
