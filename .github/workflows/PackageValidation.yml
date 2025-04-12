@@ -46,8 +46,8 @@ jobs:
                 sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject/force-app/
                 sfdx plugins
                 pwd
-                ls -a
-                ls -a changed-sources
+                echo Y | ls -a
+                echo Y ls -a changed-sources
 
         -   name: Dev login
             run: |
