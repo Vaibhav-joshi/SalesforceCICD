@@ -14,5 +14,5 @@ if (branchPattern.test(branchName) && usernamePattern.test(username)) {
     `Invalid branch name: ${branchName}\n` +
       `Expected format: feature/firstname.lastname/US{number}`
   );
-  process.exit(1); // Exit with failure
+  process.exit(1); // Exit with failure  
 }
