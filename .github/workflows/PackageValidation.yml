@@ -43,8 +43,13 @@ jobs:
         -   name: Generate delta package
             run: |
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources/ --generate-delta --source-dir SFProject/force-app/
+                echo "BASE ref : $GITHUB_BASE_REF"
+                echo "HEAD ref : $GITHUB_HEAD_REF"
+                sfdx sgd source delta --to "$GITHUB_BASE_REF" --from "$GITHUB_HEAD_REF" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject/force-app/
                 sfdx plugins
+                pwd
+                ls -a
+                ls -a changed-sources
 
         -   name: Dev login
             run: |
