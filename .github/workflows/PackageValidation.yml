@@ -43,11 +43,8 @@ jobs:
         -   name: Generate delta package
             run: |
                 mkdir changed-sources
-                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject/force-app/
+                sfdx sgd source delta --to "remotes/origin/HEAD" --from "remotes/origin/feature/vaibhav.joshi/US1234" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject/force-app/
                 sfdx plugins
-                pwd
-                echo Y | ls -a
-                echo Y ls -a changed-sources
 
         -   name: Dev login
             run: |
@@ -57,9 +54,9 @@ jobs:
 
         -   name: Validate delta sf package
             run: |
-                pwd
-                ls -a
-                ls -a changed-sources
+                echo Y | pwd
+                echo Y | ls -a
+                echo Y ls -a changed-sources
                 sf project deploy validate --source-dir changed-sources/SFProject/force-app --test-level RunLocalTests
 
 
