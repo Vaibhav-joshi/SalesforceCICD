@@ -59,6 +59,7 @@ jobs:
 
                 mkdir SFProject/changed-sources
                 sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir SFProject/changed-sources --generate-delta --source-dir ./SFProject
+                ls -aR SFProject/changed-sources
 
         -   name: Dev login
             run: |
@@ -68,7 +69,7 @@ jobs:
 
         -   name: Validate delta sf package
             run: |
-                ls -a changed-sources
-                sf project deploy validate --source-dir changed-sources --test-level RunLocalTests
+                ls -a SFProject/changed-sources
+                sf project deploy validate --source-dir SFProject/changed-sources --test-level RunLocalTests
 
 
