@@ -42,7 +42,7 @@ jobs:
 
         -   name: Generate delta package
             run: |
-                git fetch -all
+                git fetch --all
                 BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
                 HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
                 echo "  "
