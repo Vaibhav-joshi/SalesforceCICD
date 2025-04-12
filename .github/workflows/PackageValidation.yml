@@ -48,7 +48,7 @@ jobs:
                 HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
                 echo "BASE ref SHA : $BASE_SHA"
                 echo "HEAD ref SHA : $HEAD_SHA"
-                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir .
+                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir /SFProject
                 echo "Contents of changed-sources:"
                 ls -R changed-sources
 
@@ -63,6 +63,6 @@ jobs:
                 echo Y | pwd
                 echo Y | ls -a
                 echo Y ls -a changed-sources
-                sf project deploy validate --source-dir changed-sources --test-level RunLocalTests
+                sf project deploy validate --source-dir changed-sources/SFProject --test-level RunLocalTests
 
 
