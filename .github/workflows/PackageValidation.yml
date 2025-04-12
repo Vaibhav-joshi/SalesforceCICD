@@ -57,8 +57,8 @@ jobs:
                 echo "=========================Contant of Head end==="
                 echo "  "
 
-                mkdir changed-sources
-                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources --generate-delta --source-dir ./SFProject
+                mkdir SFProject/changed-sources
+                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir SFProject/changed-sources --generate-delta --source-dir ./SFProject
 
         -   name: Dev login
             run: |
