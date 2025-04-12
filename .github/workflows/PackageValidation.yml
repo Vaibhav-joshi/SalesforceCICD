@@ -48,7 +48,24 @@ jobs:
                 HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
                 echo "BASE ref SHA : $BASE_SHA"
                 echo "HEAD ref SHA : $HEAD_SHA"
-                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir ./SFProject
+                echo "  "
+                echo "====="
+                echo "===Contant of Base start==="
+                git checkout $BASE_SHA
+                ls -R
+                echo "===Contant of Base end==="
+                echo "====="
+                echo "  "
+                echo "====="
+                echo "===Contant of Head start==="
+                git checkout $HEAD_SHA
+                ls -R
+                echo "===Contant of Head end==="
+                echo "====="
+                echo "  "
+                
+
+                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir .
                 echo "Contents of changed-sources:"
                 ls -R changed-sources
 
