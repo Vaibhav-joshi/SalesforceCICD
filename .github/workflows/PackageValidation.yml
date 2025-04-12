@@ -58,7 +58,7 @@ jobs:
                 echo "  "
 
                 mkdir SFProject/changed-sources
-                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir SFProject/changed-sources --generate-delta --source-dir ./SFProject
+                sfdx sgd source delta --to "HEAD" --from "HEAD~1" --output-dir SFProject/changed-sources --generate-delta --source-dir ./SFProject
                 ls -aR SFProject/changed-sources
 
         -   name: Dev login
