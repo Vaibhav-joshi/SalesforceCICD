@@ -42,32 +42,28 @@ jobs:
 
         -   name: Generate delta package
             run: |
-                mkdir changed-sources
                 git fetch --all
-                BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
-                HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
-                echo "BASE ref SHA : $BASE_SHA"
-                echo "HEAD ref SHA : $HEAD_SHA"
+                BASE_SHA=$(git rev-parse "$GITHUB_BASE_REF")
+                HEAD_SHA=$(git rev-parse "$GITHUB_HEAD_REF")
                 echo "  "
                 echo "====="
-                echo "===Contant of Base start==="
+                echo "=======================Contant of Base start==="
                 git checkout $BASE_SHA
                 ls -R
-                echo "===Contant of Base end==="
+                echo "========================Contant of Base end==="
                 echo "====="
                 echo "  "
                 echo "====="
-                echo "===Contant of Head start==="
+                echo "=========================Contant of Head start==="
                 git checkout $HEAD_SHA
                 ls -R
-                echo "===Contant of Head end==="
+                echo "=========================Contant of Head end==="
                 echo "====="
                 echo "  "
-                
 
+                mkdir changed-sources
+                
                 sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir .
-                echo "Contents of changed-sources:"
-                ls -R changed-sources
 
         -   name: Dev login
             run: |
