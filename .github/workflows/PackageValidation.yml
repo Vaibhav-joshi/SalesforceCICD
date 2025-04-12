@@ -46,24 +46,19 @@ jobs:
                 BASE_SHA=$(git rev-parse "origin/$GITHUB_BASE_REF")
                 HEAD_SHA=$(git rev-parse "origin/$GITHUB_HEAD_REF")
                 echo "  "
-                echo "====="
                 echo "=======================Contant of Base start==="
                 git checkout $BASE_SHA
                 ls -R
                 echo "========================Contant of Base end==="
-                echo "====="
                 echo "  "
-                echo "====="
                 echo "=========================Contant of Head start==="
                 git checkout $HEAD_SHA
                 ls -R
                 echo "=========================Contant of Head end==="
-                echo "====="
                 echo "  "
 
                 mkdir changed-sources
-                
-                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources/ --generate-delta --source-dir .
+                sfdx sgd source delta --to "$BASE_SHA" --from "$HEAD_SHA" --output-dir changed-sources --generate-delta --source-dir ./SFProject/
 
         -   name: Dev login
             run: |
@@ -73,9 +68,7 @@ jobs:
 
         -   name: Validate delta sf package
             run: |
-                echo Y | pwd
-                echo Y | ls -a
-                echo Y ls -a changed-sources
-                sf project deploy validate --source-dir changed-sources/SFProject --test-level RunLocalTests
+                ls -a changed-sources
+                sf project deploy validate --source-dir changed-sources --test-level RunLocalTests
 
 
